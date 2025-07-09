@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package user;
+
+// User message definition
+message User {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  repeated string roles = 4;
+  UserProfile profile = 5;
+  int64 created_at = 6;
+  bool is_active = 7;
+}
+
+// User profile nested message
+message UserProfile {
+  string bio = 1;
+  string avatar_url = 2;
+  Address address = 3;
+  repeated SocialLink social_links = 4;
+}
+
+// Address message
+message Address {
+  string street = 1;
+  string city = 2;
+  string state = 3;
+  string zip_code = 4;
+  string country = 5;
+}
+
+// Social link message
+message SocialLink {
+  string platform = 1;
+  string url = 2;
+  bool is_verified = 3;
+}
+
+// Request/Response messages for API
+message GetUserRequest {
+  int32 user_id = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
+  bool success = 2;
+  string error_message = 3;
+}
+
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+  UserProfile profile = 3;
+}
+
+message CreateUserResponse {
+  User user = 1;
+  bool success = 2;
+  string error_message = 3;
+}
